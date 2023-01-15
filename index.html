@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <div class="h-screen flex items-center justify-center">
+        <div class="block p-6 rounded-lg shadow-lg bg-white">
+            <h1 class="text-2xl mb-6 text-center font-bold text-indigo-700">I2C2 Hackathon UTM Maker</h1>
+            <form action="" method="post" id="myForm">
+                <div class="form-group mb-6">
+                    <label for="exampleInputEmail1" class="form-label inline-block mb-2 text-gray-700">Community/Campus Champ Name</label>
+                    <input type="text" name="name" id="name" class="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                </div>
+                <div class="form-group mb-6" >
+                    <select name="cp_ca" id="cp_ca" class="form-control
+                    block
+                    w-full
+                    px-3
+                    py-1.5
+                    text-base
+                    font-normal
+                    text-gray-700
+                    bg-white bg-clip-padding
+                    border border-solid border-gray-300
+                    rounded
+                    transition
+                    ease-in-out
+                    m-0
+                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                        <option value="Community Partner">Community Partner</option>
+                        <option value="Campus Champ">Campus Champ</option>
+                    </select>
+                </div>
+                <div class="form-group mb-6">
+                    <label for="exampleInputEmail1" class="form-label inline-block mb-2 text-gray-700">UTM
+                        Source</label>
+                    <input type="text" name="utm_source" id="utm_source" class="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                </div>
+                <div class="form-group mb-6">
+                    <label for="exampleInputEmail1" class="form-label inline-block mb-2 text-gray-700">UTM
+                        Medium</label>
+
+                    <input type="text" name="utm_medium" id="utm_medium" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                </div>
+                <div class="form-group mb-6">
+                    <label for="exampleInputEmail1" class="form-label inline-block mb-2 text-gray-700">UTM
+                        Campaign</label>
+                    <input type="text" name="utm_campaign" id="utm_campaign" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
+                </div>
+                <input type="hidden" name="link_submit" id="link_submit" value="">
+                <input type="submit" value="Submit" class="px-6
+        py-2.5
+        bg-indigo-600
+        text-white
+        font-medium
+        text-xs
+        leading-tight
+        uppercase
+        rounded
+        shadow-md
+        hover:bg-blue-700 hover:shadow-lg
+        focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+        active:bg-blue-800 active:shadow-lg
+        transition
+        duration-150
+        ease-in-out cursor-pointer">
+
+            </form>
+
+            <div class="mt-6">
+                <a id="link" class="text-blue-700" target="_blank"></a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzbwU5uuHy12wSxQDN9pwdbLfR9g738mhFE-yE4oqazViYM1tGo_ILLTM-svGFeIA2VTg/exec';
+        const form = document.forms['myForm']
+        document.getElementById("myForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            var utmSource = document.getElementById("utm_source").value;
+            var utmMedium = document.getElementById("utm_medium").value;
+            var utmCampaign = document.getElementById("utm_campaign").value;
+            var link_submit = document.getElementById("link_submit").value = "https://i2c2.tech?utm_source=" + utmSource + "&utm_medium=" + utmMedium + "&utm_campaign=" + utmCampaign;
+            document.getElementById("link").href = "https://i2c2.tech?utm_source=" + utmSource + "&utm_medium=" + utmMedium + "&utm_campaign=" + utmCampaign;
+            document.getElementById("link").innerHTML = "https://i2c2.tech?utm_source=" + utmSource + "&utm_medium=" + utmMedium + "&utm_campaign=" + utmCampaign;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => alert("Thank you! your form is submitted successfully."))
+                .then(() => { window.location.reload(); })
+                .catch(error => console.error('Error!', error.message))
+            alert("Thank you! your form is submitted successfully.")
+        });
+        // function generateUTMLink(baseUrl, utmSource, utmMedium, utmCampaign) {
+        //     return baseUrl + "?utm_source=" + utmSource + "&utm_medium=" + utmMedium + "&utm_campaign=" + utmCampaign;
+        // }
+        // document.getElementById("link").href = generateUTMLink("https://example.com", "facebook", "cpc", "summer_sale");
+    </script>
+
+</body>
+
+</html>
